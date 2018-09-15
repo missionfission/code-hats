@@ -13,7 +13,7 @@ struct aer{
 int x,y,t;
 bool p;
 };
-const int rho = 6;
+const int rho = 7;
 const int n = 5880;
 const int tau=100000;
 void hats(aer *event);
