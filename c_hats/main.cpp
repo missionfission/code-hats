@@ -6,8 +6,8 @@
 #include <dirent.h>
 #include <iostream>
 #include "time.h"
-#include <hls_opencv.h>
-using namespace cv;
+// #include <hls_opencv.h>
+// using namespace cv;
 const int size =1000;
 aer * data[size];
 void computeHATS(){
@@ -15,14 +15,9 @@ for(int i=0;i<size;i++)
 	hats(data[i]);
 }
 
-void main() {
-readdata();
-computeHATS();
-}
-
 void readdata()
 {
-char *filename="data.mat";
+char *filename="input.bin";
 FILE *infile = fopen(filename, "rb");
   if (!infile) {
     printf("ERROR: File %s could not be opened!\n", filename);
@@ -31,3 +26,10 @@ FILE *infile = fopen(filename, "rb");
   fread(data, sizeof(aer), size, infile);
   fclose(infile);
 }
+
+int main() {
+readdata();
+computeHATS();
+return 0;
+}
+

@@ -7,13 +7,14 @@
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include "ap_int.h"
+// #include "ap_int.h"
 using namespace std;
 struct aer{
 int x,y,t;
 bool p;
 };
 const int rho = 6;
+const int n = 5880;
 const int tau=100000;
 void hats(aer *event);
 
