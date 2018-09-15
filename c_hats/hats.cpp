@@ -15,8 +15,6 @@ void svm(float sum,float hist[rho][rho]){
 }
 void computeHistogram0(float hist[rho][rho],aer *event)
 {
-// make a timesurface
-//float hist[rho][rho];
 int cnt=0;
 float tmsurf[rho][rho];
 aer *memory_0[30];
