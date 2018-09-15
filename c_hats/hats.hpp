@@ -10,8 +10,7 @@
 // #include "ap_int.h"
 using namespace std;
 struct aer{
-int x,y,t;
-bool p;
+int x,y,t,p;
 };
 const int rho = 7;
 const int n = 5880;
