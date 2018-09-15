@@ -9,9 +9,8 @@
 // #include <hls_opencv.h>
 // using namespace cv;
 
-void computeHATS(aer *data[],int size){
-// for(int i=0;i<size;i++)
-// 	hats(data[i]);
+void computeHATS(aer **data,int size){
+  	cout<<hats(data);
 }
 
 void readdata(aer *data[],int size)
