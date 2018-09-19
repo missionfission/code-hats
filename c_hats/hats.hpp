@@ -17,8 +17,8 @@
 typedef ap_uint<6> addr_t;  
 typedef ap_uint<6> int_t;  
 typedef ap_uint<10> tm_t;
-typedef ap_fixed<8,4> data_t;
-typedef ap_fixed<8,4> comp_t;
+typedef ap_fixed<12,4> data_t;
+typedef ap_fixed<12,4> comp_t;
 
 using namespace std;
 struct aer{
@@ -28,6 +28,7 @@ bool p;
 };
 const int rho = 7;
 const int ents = 50;
+const int N_PE=7;
 const int n = 5880;
 const int tau=100000;
 const int tot_cell=120;

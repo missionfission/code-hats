@@ -18,16 +18,20 @@ void computeHistogram(comp_t hist[rho][rho],aer event,aer memory[],int_t size)
 comp_t tmsurf[rho][rho];
 #pragma HLS RESOURCE variable=tmsurf core=RAM_2P_BRAM
 //memset(tmsurf, 0, sizeof(tmsurf[0][0]) *49);
-if(event.p)
-   { for(int_t i=0;i<size;i++)
-        if(abs(memory[i].x-event.x)<=rho/2 && abs(memory[i].y-event.y)<=rho/2)
-        tmsurf[memory[i].x-event.x+rho/2][memory[i].y-event.y+rho/2]+=1-(event.t-memory[i].t)/tau;
-    memory[size]=event;
-
-   }
+ for(int_t i=0;i<size;i++)
+	{
+	#pragma HLS unroll factor = 10*N_PE
+	 int_t x=memory[i].y-event.y;
+	 int_t y=memory[i].x-event.x;
+        if(abs(x)<=rho/2 && abs(y)<=rho/2)
+        tmsurf[x+rho/2][y+rho/2]=1-(event.t-memory[i].t)/tau;
+	}
 for(int_t i=0;i<rho;i++)
     for(int_t j=0;j<rho;j++)
-        hist[i][j]+=tmsurf[i][j];
+	{
+    	#pragma HLS unroll factor = N_PE
+#pragma HLS PIPELINE II = 1
+        hist[i][j]+=tmsurf[i][j];}
 }
 
 comp_t hats(aer events[ents],int_t n,comp_t *weights)
@@ -53,15 +57,21 @@ int_t size[tot_cell][2];
 for(int_t j=0;j<ents;j++)
 	{cell_id= events[j].x*10+events[j].y;
 	computeHistogram(hist[cell_id],events[j],memory[cell_id][events[j].p],size[cell_id][events[j].p]);
+	memory[cell_id][events[j].p][size[cell_id][events[j].p]]=events[j];
 	size[cell_id][events[j].p]++;
 	cnt[cell_id]++;
 	}
+
 
 for(int_t k=0;k<tot_cell;k++)
 {if(cnt[k]>0)
     {for(int_t i=0;i<rho;i++)
         for(int_t j=0;j<rho;j++)
-            hist[k][i][j]/=cnt[k];
+        {
+//        	#pragma HLSs LOOP_TRIPCOUNT min = 16 max = 256
+        	#pragma HLS unroll factor = N_PE
+        	hist[k][i][j]/=cnt[k];
+        }
 
     }
 }
