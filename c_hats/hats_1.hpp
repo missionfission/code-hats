@@ -10,22 +10,22 @@
 #include "ap_int.h"
 #include "ap_fixed.h"
 //
-//typedef ap_int<10> addr_t;
-//typedef ap_int<18> tm_t;
-//typedef ap_int<12> int_t;
-typedef int addr_t;
-typedef int  tm_t;
-typedef int int_t;
-typedef float comp_t;
-typedef float hist_t;
-typedef float sum_t;
-//typedef ap_fixed<24,12> comp_t;
-//typedef ap_int<12>  hist_t;
-//typedef ap_fixed<24,12>  sum_t;
+typedef ap_int<10> addr_t;
+typedef ap_int<18> tm_t;
+typedef ap_int<12> int_t;
+//typedef int addr_t;
+//typedef int  tm_t;
+//typedef int int_t;
+//typedef float comp_t;
+//typedef float hist_t;
+//typedef float sum_t;
+typedef ap_fixed<24,12> comp_t;
+typedef ap_int<12>  hist_t;
+typedef ap_fixed<24,12>  sum_t;
 using namespace std;
 struct aer{
 addr_t x,y;
-tm_t t;
+//tm_t t;
 bool p;
 bool reset;
 };

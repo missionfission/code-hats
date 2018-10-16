@@ -3,7 +3,7 @@
 sum_t loc_sum[tot_cell];
 int_t cntmem[tot_cell][2];
 int_t cnt[tot_cell];
-aer memory[tot_cell][2][1000];
+aer memory[tot_cell][2][50];
 
 sum_t svm(hist_t hist[rho][rho],int_t offset){
 sum_t sum=0;
@@ -66,16 +66,16 @@ addr_t cell_id;
 //memset(cnt, 0, sizeof(cnt[0])*tot_cell);
 //memset(cntmem, 0, sizeof(cntmem[0][0])*tot_cell*2);
 
-for (int_t i=0;i<tot_cell;i++)
-	{
-	#pragma HLS unroll
-	loc_sum[i]=0;
-	cnt[i]=0 ;
-	cntmem[i][0]=0;
-	cntmem[i][1]=0;}
+//for (int_t i=0;i<tot_cell;i++)
+//	{
+//	#pragma HLS unroll
+//	loc_sum[i]=0;
+//	cnt[i]=0 ;
+//	cntmem[i][0]=0;
+//	cntmem[i][1]=0;}
 for(int_t j=0;j<size;j++)
 	{
-	#pragma HLS loop_tripcount min=0 max=750 avg=750
+	#pragma HLS loop_tripcount min=0 max=900
 //	cell_id= (events[j].y)/10;
 	cell_id= ((events[j].x)/10)*10+(events[j].y)/10;
 	computeHistogram(cell_id,events[j]);
