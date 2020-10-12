@@ -1,1 +1,1 @@
-# hats_hardware
+# HATS : Implementation on FPGA Code
